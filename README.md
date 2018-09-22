@@ -14,8 +14,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - accessibility
 - Service Worker
 - attribute [Foursquare](https://developer.foursquare.com/docs/terms-of-use/attribution)
+- attribute Google Maps
 
 
+## Places & Foursquare venue IDs / lat-longs
+1. Fraunces Tavern - 507f06e9e4b0d2368fcbada4, "lat": 40.70352594119276, "lng": -74.01139528322373
+2. Ear Inn - 3fd66200f964a52071e61ee3, "lat": 40.726083607871615, "lng": -74.00948307272056
+3. McSorley's Old Ale House - 3fd66200f964a52058e41ee3, "lat": 40.728602348741525, "lng": -73.98996152288103
+4. Julius' - 3fd66200f964a520efe61ee3, "lat": 40.73449699128521, "lng": -74.00147997860874
+5. White Horse Tavern - 3fd66200f964a52039eb1ee3, "lat": 40.73568541965826, "lng": -74.00594379881144
+6. Old Town Bar - 3fd66200f964a52067e91ee3, "lat": 40.737537, "lng": -73.989302
+7. P.J. Clarke's - 3fd66200f964a520fbe71ee3, "lat": 40.758937738691245, "lng": -73.96846225850372
+8. Bemelmans Bar - 3fd66200f964a520cdea1ee3, "lat": 40.77460663060093, "lng": -73.96330814709152
+9. Landmark Tavern - 3fd66200f964a5208be81ee3, "lat": 40.763350703245884, "lng": -73.99647202623504
+10. Pete's Tavern - 3fd66200f964a52068e31ee3, "lat": 40.73645856380347, "lng": -73.98689116651353
+request URL:  https://api.foursquare.com/v2/venues/VENUEID?client_id=ID&client_secret=SECRET&v=20180922
 
 ---
 
