@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 class List extends Component {
   render () {
+    const { places } = this.props;
+
     return (
-      <div>
-        <p>This will be my list.</p>
-      </div>
+      <ul>
+        {places.map(place => (
+          <li key={place.id}>{place.name}</li>
+        ))}
+      </ul>
     );
   }
 }
