@@ -5,11 +5,13 @@ class List extends Component {
     const { places } = this.props;
 
     return (
-      <ul>
-        {places.map(place => (
-          <li key={place.id}>{place.name}</li>
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {places.map(place => (
+            <li key={place.id}>{place.name}</li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
