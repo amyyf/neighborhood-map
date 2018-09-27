@@ -6,7 +6,10 @@ import MapContainer from './MapContainer.js';
 class App extends Component {
   constructor (props) {
     super(props);
+    this.markers = [];
+    this.setActiveMarker = this.setActiveMarker.bind(this);
     this.state = {
+      activeMarker: null,
       places: [
         {
           name: 'Fraunces Tavern',
@@ -92,6 +95,15 @@ class App extends Component {
     };
   }
 
+  setActiveMarker (event) {
+    const markerName = event.target.title;
+    for (let i = 0; i < this.markers.length; i++) {
+      if (this.markers[i].title === markerName) {
+        this.setState({ activeMarker: this.markers[i] });
+      }
+    }
+  }
+
   render () {
     return (
       <div className='App'>
@@ -100,7 +112,12 @@ class App extends Component {
         </header>
         <main>
           <List places={this.state.places} />
-          <MapContainer places={this.state.places} />
+          <MapContainer
+            places={this.state.places}
+            markers={this.markers}
+            activeMarker={this.state.activeMarker}
+            setActiveMarker={this.setActiveMarker}
+          />
         </main>
       </div>
     );

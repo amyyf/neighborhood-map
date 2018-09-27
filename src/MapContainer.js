@@ -8,10 +8,6 @@ class MapContainer extends Component {
     this.mapDiv = React.createRef();
     this.infoWindow = new google.maps.InfoWindow();
     this.map = null;
-    this.markers = [];
-    this.state = {
-      activeMarker: null
-    };
   }
 
   componentDidMount () {
@@ -20,9 +16,10 @@ class MapContainer extends Component {
   }
 
   populateInfoWindow () {
-    const venueId = this.state.activeMarker.id;
+    console.log('inside populateinfowindow');
+    const venueId = this.props.activeMarker.id;
     let address, description, name, priceTier, rating, url;
-    this.infoWindow.open(this.map, this.state.activeMarker);
+    this.infoWindow.open(this.map, this.props.activeMarker);
     fetch(`https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`)
       .then(results => results.json())
       .then(response => {
@@ -46,7 +43,7 @@ class MapContainer extends Component {
       })
       .catch(e => {
         this.infoWindow.setContent(`
-          <h3>${this.state.activeMarker.title}</h3>
+          <h3>${this.props.activeMarker.title}</h3>
           <p>There was an error retrieving additional data.</p>
           `);
         console.log(e);
@@ -54,6 +51,9 @@ class MapContainer extends Component {
   }
 
   renderMap (mapDiv) {
+    if (!mapDiv) {
+      return;
+    }
     const map = new google.maps.Map(mapDiv, {
       center: {lat: 40.7413549, lng: -73.9980244},
       zoom: 12
@@ -63,11 +63,10 @@ class MapContainer extends Component {
   }
 
   renderMarkers (map) {
-    const { places } = this.props;
-    for (let i = 0; i < places.length; i++) {
-      const position = places[i].position;
-      const title = places[i].name;
-      const id = places[i].id;
+    for (let i = 0; i < this.props.places.length; i++) {
+      const position = this.props.places[i].position;
+      const title = this.props.places[i].name;
+      const id = this.props.places[i].id;
       const marker = new google.maps.Marker({
         position: position,
         title: title,
@@ -75,22 +74,17 @@ class MapContainer extends Component {
         animation: google.maps.Animation.DROP,
         id: id
       });
-      this.markers.push(marker);
-    }
-  }
-
-  setActiveMarker (event) {
-    const markerName = event.target.title;
-    for (let i = 0; i < this.markers.length; i++) {
-      if (this.markers[i].title === markerName) {
-        this.setState({ activeMarker: this.markers[i] }, this.populateInfoWindow.bind(this));
-      }
+      this.props.markers.push(marker);
     }
   }
 
   render () {
+    this.renderMap();
+    if (this.props.activeMarker) {
+      this.populateInfoWindow();
+    }
     return (
-      <div ref={this.mapDiv} onClick={(e) => this.setActiveMarker(e)} style={{width: 500, height: 500}} />
+      <div ref={this.mapDiv} onClick={(e) => this.props.setActiveMarker(e)} style={{width: 500, height: 500}} />
     );
   }
 }
