@@ -16,7 +16,6 @@ class MapContainer extends Component {
   }
 
   populateInfoWindow () {
-    console.log('inside populateinfowindow');
     const venueId = this.props.activeMarker.id;
     let address, description, name, priceTier, rating, url;
     this.infoWindow.open(this.map, this.props.activeMarker);
@@ -63,10 +62,10 @@ class MapContainer extends Component {
   }
 
   renderMarkers (map) {
-    for (let i = 0; i < this.props.places.length; i++) {
-      const position = this.props.places[i].position;
-      const title = this.props.places[i].name;
-      const id = this.props.places[i].id;
+    this.props.places.forEach(place => {
+      const position = place.position;
+      const title = place.name;
+      const id = place.id;
       const marker = new google.maps.Marker({
         position: position,
         title: title,
@@ -74,8 +73,9 @@ class MapContainer extends Component {
         animation: google.maps.Animation.DROP,
         id: id
       });
+      marker.addListener('click', () => this.props.setActiveMarker(marker.title));
       this.props.markers.push(marker);
-    }
+    });
   }
 
   render () {
@@ -84,7 +84,7 @@ class MapContainer extends Component {
       this.populateInfoWindow();
     }
     return (
-      <div ref={this.mapDiv} onClick={(e) => this.props.setActiveMarker(e)} style={{width: 500, height: 500}} />
+      <div ref={this.mapDiv} style={{width: 500, height: 500}} />
     );
   }
 }

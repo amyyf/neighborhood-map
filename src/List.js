@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 class List extends Component {
   render () {
-    const { places } = this.props;
+    const { places, setActiveMarker } = this.props;
 
     return (
       <div>
         <ul>
           {places.map(place => (
-            <li key={place.id}>{place.name}</li>
+            <li key={place.id} onClick={() => setActiveMarker(place.name)}>{place.name}</li>
           ))}
         </ul>
       </div>

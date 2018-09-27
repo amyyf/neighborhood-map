@@ -95,8 +95,8 @@ class App extends Component {
     };
   }
 
-  setActiveMarker (event) {
-    const markerName = event.target.title;
+  setActiveMarker (text) {
+    const markerName = text;
     for (let i = 0; i < this.markers.length; i++) {
       if (this.markers[i].title === markerName) {
         this.setState({ activeMarker: this.markers[i] });
@@ -111,7 +111,10 @@ class App extends Component {
           <h1 className='App-title'>Ten of NYC's Oldest Bars</h1>
         </header>
         <main>
-          <List places={this.state.places} />
+          <List
+            places={this.state.places}
+            setActiveMarker={this.setActiveMarker}
+          />
           <MapContainer
             places={this.state.places}
             markers={this.markers}
