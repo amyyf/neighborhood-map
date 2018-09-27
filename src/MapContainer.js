@@ -1,4 +1,4 @@
-/* global google */
+/* global google fetch */
 
 import React, { Component } from 'react';
 
@@ -20,8 +20,35 @@ class MapContainer extends Component {
   }
 
   populateInfoWindow () {
+    const venueId = this.state.activeMarker.id;
+    let address, description, name, priceTier, rating, url;
     this.infoWindow.open(this.map, this.state.activeMarker);
-    this.infoWindow.setContent(this.state.activeMarker.title);
+    fetch(`https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`)
+      .then(results => results.json())
+      .then(response => {
+        address = response.response.venue.location.address;
+        description = response.response.venue.description;
+        name = response.response.venue.name;
+        priceTier = response.response.venue.price.tier;
+        rating = response.response.venue.rating;
+        url = response.response.venue.url;
+        console.log(response);
+        this.infoWindow.setContent(`
+          ${name}
+          ${address}
+          ${description}
+          ${priceTier}
+          ${rating}
+          ${url}
+          `);
+      })
+      .catch(e => {
+        this.infoWindow.setContent(`
+          ${this.state.activeMarker.title}
+          There was an error retrieving additional data.
+          `);
+        console.log(e);
+      });
   }
 
   renderMap (mapDiv) {

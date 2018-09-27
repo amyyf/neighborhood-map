@@ -12,6 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
       - Filter
       - Listing
 - accessibility
+- fallback page or text if API calls fail
 - Service Worker
 - attribute [Foursquare](https://developer.foursquare.com/docs/terms-of-use/attribution)
 - attribute Google Maps
@@ -33,7 +34,7 @@ request URL:  https://api.foursquare.com/v2/venues/VENUEID?client_id=ID&client_s
 
 ## Dependencies and resources
 
-I referred to [Cuneyt Aliustaoglu's article](http://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/) on using Google Maps with React without using custom libraries. I made my call synchronously since the map is such a vital component of my site - there's not much point using the site if the API call fails. I also referred to [React's docs](https://reactjs.org/docs/refs-and-the-dom.html) to render the Google map using refs rather than `getElementById`.
+I referred to [Cuneyt Aliustaoglu's article](http://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/) on using Google Maps with React without using custom libraries. I also referred to [React's docs](https://reactjs.org/docs/refs-and-the-dom.html) to render the Google map using refs rather than `getElementById`.
 
 ---
 
