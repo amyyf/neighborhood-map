@@ -19,7 +19,9 @@ class MapContainer extends Component {
     const venueId = this.props.activeMarker.id;
     let address, description, name, priceTier, rating, url;
     this.infoWindow.open(this.map, this.props.activeMarker);
-    fetch(`https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`)
+    fetch(
+      // `https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`
+    )
       .then(results => results.json())
       .then(response => {
         console.log(response);
