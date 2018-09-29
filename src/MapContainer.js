@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 class MapContainer extends Component {
   constructor (props) {
     super(props);
-    this.mapDiv = React.createRef();
     this.infoWindow = new google.maps.InfoWindow();
     this.map = null;
+    this.mapDiv = React.createRef();
   }
 
   componentDidMount () {
@@ -73,6 +73,7 @@ class MapContainer extends Component {
         title: title,
         map: map,
         animation: google.maps.Animation.DROP,
+        icon: this.props.setMarkerIcon(this.props.markerColor.initial),
         id: id
       });
       marker.addListener('click', () => this.props.setActiveMarker(marker.title));

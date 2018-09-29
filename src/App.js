@@ -1,3 +1,5 @@
+/* global google */
+
 import React, { Component } from 'react';
 import './App.css';
 import List from './List.js';
@@ -7,6 +9,10 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.markers = [];
+    this.markerColor = {
+      active: 'FFFF24',
+      initial: '0091ff'
+    };
     this.setActiveMarker = this.setActiveMarker.bind(this);
     this.places = [
       {
@@ -99,15 +105,31 @@ class App extends Component {
     const markerName = text;
     for (let i = 0; i < this.markers.length; i++) {
       if (this.markers[i].title === markerName) {
-        this.setState({ activeMarker: this.markers[i] });
+        // if an activeMarker already exists, change its color back to default
+        if (this.state.activeMarker) {
+          this.state.activeMarker.setIcon(
+            this.setMarkerIcon(this.markerColor.initial)
+          );
+        }
+        // set the new activeMarker and change its color to active
+        this.setState({ activeMarker: this.markers[i] }, () => {
+          this.state.activeMarker.setIcon(
+            this.setMarkerIcon(this.markerColor.active)
+          );
+        });
       }
     }
-    // this.updatePlaces(markerName);
   }
-  // TODO push fetched data to master list to help filter?
-  // updatePlaces (placeName) {
-  //
-  // }
+
+  setMarkerIcon (markerColor) {
+    const markerImage = new google.maps.MarkerImage(
+      `http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|${markerColor}|40|_|%E2%80%A2`,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(10, 34),
+      new google.maps.Size(21, 34));
+    return markerImage;
+  }
 
   render () {
     return (
@@ -124,7 +146,9 @@ class App extends Component {
             places={this.places}
             markers={this.markers}
             activeMarker={this.state.activeMarker}
+            markerColor={this.markerColor}
             setActiveMarker={this.setActiveMarker}
+            setMarkerIcon={this.setMarkerIcon}
           />
         </main>
       </div>
