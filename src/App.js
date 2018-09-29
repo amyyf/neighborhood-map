@@ -113,9 +113,9 @@ class App extends Component {
 
   // TODO change back to this.places.length
   componentDidMount () {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < this.places.length; i++) {
       const id = this.places[i].id;
-      // this.getFoursquareData(i, id);
+      this.getFoursquareData(i, id);
     }
   }
 
@@ -196,6 +196,15 @@ class App extends Component {
       </div>
     );
   }
+}
+
+if (navigator.serviceWorker) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('serviceWorkerDev.js').then(function (registration) {
+    }).catch(function (error) {
+      console.log('sw registration failed with error ', error);
+    });
+  });
 }
 
 export default App;
