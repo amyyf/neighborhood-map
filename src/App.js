@@ -21,7 +21,8 @@ class App extends Component {
         position: {
           lat: 40.70352594119276,
           lng: -74.01139528322373
-        }
+        },
+        yearOpened: 1762
       },
       {
         name: 'Ear Inn',
@@ -29,7 +30,8 @@ class App extends Component {
         position: {
           lat: 40.726083607871615,
           lng: -74.00948307272056
-        }
+        },
+        yearOpened: 1817
       },
       {
         name: 'McSorley\'s Old Ale House',
@@ -37,7 +39,8 @@ class App extends Component {
         position: {
           lat: 40.728602348741525,
           lng: -73.98996152288103
-        }
+        },
+        yearOpened: 1854
       },
       {
         name: 'Julius\'',
@@ -45,7 +48,8 @@ class App extends Component {
         position: {
           lat: 40.73449699128521,
           lng: -74.00147997860874
-        }
+        },
+        yearOpened: 1867
       },
       {
         name: 'White Horse Tavern',
@@ -53,7 +57,8 @@ class App extends Component {
         position: {
           lat: 40.73568541965826,
           lng: -74.00594379881144
-        }
+        },
+        yearOpened: 1880
       },
       {
         name: 'Old Town Bar',
@@ -61,7 +66,8 @@ class App extends Component {
         position: {
           lat: 40.737537,
           lng: -73.989302
-        }
+        },
+        yearOpened: 1892
       },
       {
         name: 'P.J. Clarke\'s',
@@ -69,7 +75,8 @@ class App extends Component {
         position: {
           lat: 40.758937738691245,
           lng: -73.96846225850372
-        }
+        },
+        yearOpened: 1884
       },
       {
         name: 'Bemelmans Bar',
@@ -77,7 +84,8 @@ class App extends Component {
         position: {
           lat: 40.77460663060093,
           lng: -73.96330814709152
-        }
+        },
+        yearOpened: 1947
       },
       {
         name: 'Landmark Tavern',
@@ -85,7 +93,8 @@ class App extends Component {
         position: {
           lat: 40.763350703245884,
           lng: -73.99647202623504
-        }
+        },
+        yearOpened: 1868
       },
       {
         name: 'Pete\'s Tavern',
@@ -93,7 +102,8 @@ class App extends Component {
         position: {
           lat: 40.73645856380347,
           lng: -73.98689116651353
-        }
+        },
+        yearOpened: 1864
       }
     ];
     this.state = {

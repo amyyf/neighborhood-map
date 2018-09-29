@@ -36,7 +36,7 @@ request URL:  https://api.foursquare.com/v2/venues/VENUEID?client_id=ID&client_s
 
 I referred to [Cuneyt Aliustaoglu's article](http://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/) on using Google Maps with React without using custom libraries. I also referred to [React's docs](https://reactjs.org/docs/refs-and-the-dom.html) to render the Google map using refs rather than `getElementById`.
 
-I used code from [Udacity's course](https://github.com/udacity/ud864/blob/master/Project_Code_5_BeingStylish.html) on working with Google Maps API to change the color of my active marker.
+I borrowed code from [Udacity's course](https://github.com/udacity/ud864/blob/master/Project_Code_5_BeingStylish.html) on working with Google Maps API to change the color of my active marker.
 ---
 
 Below you will find some information on how to perform common tasks.<br>
