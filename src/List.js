@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 class List extends Component {
   render () {
+    if (!this.props.isLoaded) {
+      return null;
+    }
     const { places, setActiveMarker } = this.props;
 
     return (

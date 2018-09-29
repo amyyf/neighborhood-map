@@ -10,7 +10,7 @@ class MapContainer extends Component {
     this.mapDiv = React.createRef();
   }
 
-  componentDidMount () {
+  componentDidUpdate () {
     const mapDiv = this.mapDiv.current;
     this.renderMap(mapDiv);
   }
@@ -75,6 +75,9 @@ class MapContainer extends Component {
   }
 
   render () {
+    if (!this.props.isLoaded) {
+      return null;
+    }
     this.renderMap();
     if (this.props.activeMarker) {
       this.populateInfoWindow();

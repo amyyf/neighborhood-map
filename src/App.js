@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import './App.css';
+import Filter from './Filter.js';
 import List from './List.js';
+import LoadingPage from './LoadingPage.js';
 import MapContainer from './MapContainer.js';
 
 class App extends Component {
@@ -107,11 +109,11 @@ class App extends Component {
       }
     ];
     this.state = {
-      activeMarker: null
+      activeMarker: null,
+      isLoaded: false
     };
   }
 
-  // TODO change back to this.places.length
   componentDidMount () {
     for (let i = 0; i < this.places.length; i++) {
       const id = this.places[i].id;
@@ -138,7 +140,8 @@ class App extends Component {
         place.priceTier = priceTier;
         place.rating = rating;
         place.url = url;
-      });
+      })
+      .then(() => this.setState({ isLoaded: true }));
   }
 
   setActiveMarker (text) {
@@ -178,14 +181,22 @@ class App extends Component {
           <h1 className='App-title'>Ten of NYC's Oldest Bars</h1>
         </header>
         <main>
-          <List
-            places={this.places}
-            setActiveMarker={this.setActiveMarker}
-          />
+          <LoadingPage isLoaded={this.state.isLoaded} />
+          <section>
+            <Filter
+              isLoaded={this.state.isLoaded}
+            />
+            <List
+              isLoaded={this.state.isLoaded}
+              places={this.places}
+              setActiveMarker={this.setActiveMarker}
+            />
+          </section>
           <MapContainer
             places={this.places}
             markers={this.markers}
             activeMarker={this.state.activeMarker}
+            isLoaded={this.state.isLoaded}
             markerColor={this.markerColor}
             setActiveMarker={this.setActiveMarker}
             setMarkerIcon={this.setMarkerIcon}
