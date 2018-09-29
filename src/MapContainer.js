@@ -17,18 +17,28 @@ class MapContainer extends Component {
 
   populateInfoWindow () {
     const marker = this.props.activeMarker;
-    let venue;
+    let venue, descrip;
+    let price = '';
     for (let i = 0; i < this.props.places.length; i++) {
       if (this.props.places[i].id === marker.id) {
         venue = this.props.places[i];
       }
     }
+    if (venue.description === undefined) {
+      descrip = '';
+    } else {
+      descrip = venue.description;
+    }
+    for (let i = 0; i < venue.priceTier; i++) {
+      price += '$';
+    }
     this.infoWindow.open(this.map, marker);
     this.infoWindow.setContent(`
       <h3>${venue.name}</h3>
       <h4>${venue.address}</h4>
-      <p>${venue.description}</p>
-      <p>Price: ${venue.priceTier}</p>
+      <h4>Established in ${venue.yearOpened}</h4>
+      <p>${descrip}</p>
+      <p>Price: ${price}</p>
       <p>Rating: ${venue.rating} / 10</p>
       <a href='${venue.url}'>Website</a>
     `);

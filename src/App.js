@@ -126,10 +126,8 @@ class App extends Component {
       .then(results => results.json())
       .then(response => {
         const address = response.response.venue.location.address;
-        // TODO handle undefined description
         const description = response.response.venue.description;
         const name = response.response.venue.name;
-        // TODO display # of dollar signs for price tier
         const priceTier = response.response.venue.price.tier;
         const rating = response.response.venue.rating;
         const url = response.response.venue.url;
