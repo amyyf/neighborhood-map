@@ -8,6 +8,10 @@ class MapContainer extends Component {
     this.infoWindow = new google.maps.InfoWindow();
     this.map = null;
     this.mapDiv = React.createRef();
+    this.markerColor = {
+      active: 'FFFF24',
+      initial: '0091ff'
+    };
   }
 
   componentDidUpdate () {
@@ -15,15 +19,10 @@ class MapContainer extends Component {
     this.renderMap(mapDiv);
   }
 
-  populateInfoWindow () {
-    const marker = this.props.activeMarker;
-    let venue, descrip;
+  populateInfoWindow (marker) {
+    const venue = this.props.activePlace;
+    let descrip;
     let price = '';
-    for (let i = 0; i < this.props.places.length; i++) {
-      if (this.props.places[i].id === marker.id) {
-        venue = this.props.places[i];
-      }
-    }
     if (venue.description === undefined) {
       descrip = '';
     } else {
@@ -48,16 +47,19 @@ class MapContainer extends Component {
     if (!mapDiv) {
       return;
     }
-    const map = new google.maps.Map(mapDiv, {
-      center: {lat: 40.7413549, lng: -73.9980244},
-      zoom: 12
-    });
-    this.map = map;
-    this.renderMarkers(map);
+    if (!this.map) {
+      const map = new google.maps.Map(mapDiv, {
+        center: {lat: 40.7413549, lng: -73.9980244},
+        zoom: 12
+      });
+      this.map = map;
+    }
+    this.renderMarkers(this.map);
   }
 
   renderMarkers (map) {
     this.props.places.forEach(place => {
+      const isActivePlace = (place === this.props.activePlace);
       const position = place.position;
       const title = place.name;
       const id = place.id;
@@ -65,13 +67,25 @@ class MapContainer extends Component {
         position: position,
         title: title,
         map: map,
-        animation: google.maps.Animation.DROP,
-        icon: this.props.setMarkerIcon(this.props.markerColor.initial),
+        icon: this.makeIcon(isActivePlace),
         id: id
       });
-      marker.addListener('click', () => this.props.setActiveMarker(marker.title));
-      this.props.markers.push(marker);
+      marker.addListener('click', () => this.props.setActivePlace(place));
+      if (isActivePlace) {
+        this.populateInfoWindow(marker);
+      }
     });
+  }
+
+  makeIcon (isActive) {
+    let markerColor = isActive ? this.markerColor.active : this.markerColor.initial;
+    const markerImage = new google.maps.MarkerImage(
+      `http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|${markerColor}|40|_|%E2%80%A2`,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(10, 34),
+      new google.maps.Size(21, 34));
+    return markerImage;
   }
 
   render () {

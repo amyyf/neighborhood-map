@@ -10,12 +10,6 @@ import MapContainer from './MapContainer.js';
 class App extends Component {
   constructor (props) {
     super(props);
-    this.markers = [];
-    this.markerColor = {
-      active: 'FFFF24',
-      initial: '0091ff'
-    };
-    this.setActiveMarker = this.setActiveMarker.bind(this);
     this.places = [
       {
         name: 'Fraunces Tavern',
@@ -108,21 +102,25 @@ class App extends Component {
         yearOpened: 1864
       }
     ];
+    this.setActivePlace = this.setActivePlace.bind(this);
     this.state = {
-      activeMarker: null,
+      activePlace: null,
       isLoaded: false
     };
   }
 
   componentDidMount () {
+    let promises = [];
     for (let i = 0; i < this.places.length; i++) {
       const id = this.places[i].id;
-      this.getFoursquareData(i, id);
+      promises.push(this.getFoursquareData(i, id));
     }
+    Promise.all(promises)
+      .then(() => this.setState({ isLoaded: true }));
   }
 
   getFoursquareData (arrayEl, venueId) {
-    fetch(
+    return fetch(
       `https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`
     )
       .then(results => results.json())
@@ -140,38 +138,11 @@ class App extends Component {
         place.priceTier = priceTier;
         place.rating = rating;
         place.url = url;
-      })
-      .then(() => this.setState({ isLoaded: true }));
+      });
   }
 
-  setActiveMarker (text) {
-    const markerName = text;
-    for (let i = 0; i < this.markers.length; i++) {
-      if (this.markers[i].title === markerName) {
-        // if an activeMarker already exists, change its color back to default
-        if (this.state.activeMarker) {
-          this.state.activeMarker.setIcon(
-            this.setMarkerIcon(this.markerColor.initial)
-          );
-        }
-        // set the new activeMarker and change its color to active
-        this.setState({ activeMarker: this.markers[i] }, () => {
-          this.state.activeMarker.setIcon(
-            this.setMarkerIcon(this.markerColor.active)
-          );
-        });
-      }
-    }
-  }
-
-  setMarkerIcon (markerColor) {
-    const markerImage = new google.maps.MarkerImage(
-      `http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|${markerColor}|40|_|%E2%80%A2`,
-      new google.maps.Size(21, 34),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(10, 34),
-      new google.maps.Size(21, 34));
-    return markerImage;
+  setActivePlace (place) {
+    this.setState({ activePlace: place });
   }
 
   render () {
@@ -189,17 +160,14 @@ class App extends Component {
             <List
               isLoaded={this.state.isLoaded}
               places={this.places}
-              setActiveMarker={this.setActiveMarker}
+              setActivePlace={this.setActivePlace}
             />
           </section>
           <MapContainer
+            activePlace={this.state.activePlace}
             places={this.places}
-            markers={this.markers}
-            activeMarker={this.state.activeMarker}
             isLoaded={this.state.isLoaded}
-            markerColor={this.markerColor}
-            setActiveMarker={this.setActiveMarker}
-            setMarkerIcon={this.setMarkerIcon}
+            setActivePlace={this.setActivePlace}
           />
         </main>
       </div>

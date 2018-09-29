@@ -5,13 +5,13 @@ class List extends Component {
     if (!this.props.isLoaded) {
       return null;
     }
-    const { places, setActiveMarker } = this.props;
+    const { places, setActivePlace } = this.props;
 
     return (
       <div>
         <ul>
           {places.map(place => (
-            <li key={place.id} onClick={() => setActiveMarker(place.name)}>{place.name}</li>
+            <li key={place.id} onClick={() => setActivePlace(place)}>{place.name}</li>
           ))}
         </ul>
       </div>
