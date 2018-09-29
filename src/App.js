@@ -1,4 +1,4 @@
-/* global google */
+/* global fetch google */
 
 import React, { Component } from 'react';
 import './App.css';
@@ -109,6 +109,38 @@ class App extends Component {
     this.state = {
       activeMarker: null
     };
+  }
+
+  // TODO change back to this.places.length
+  componentDidMount () {
+    for (let i = 0; i < 1; i++) {
+      const id = this.places[i].id;
+      // this.getFoursquareData(i, id);
+    }
+  }
+
+  getFoursquareData (arrayEl, venueId) {
+    fetch(
+      `https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`
+    )
+      .then(results => results.json())
+      .then(response => {
+        const address = response.response.venue.location.address;
+        // TODO handle undefined description
+        const description = response.response.venue.description;
+        const name = response.response.venue.name;
+        // TODO display # of dollar signs for price tier
+        const priceTier = response.response.venue.price.tier;
+        const rating = response.response.venue.rating;
+        const url = response.response.venue.url;
+        const place = this.places[arrayEl];
+        place.address = address;
+        place.description = description;
+        place.name = name;
+        place.priceTier = priceTier;
+        place.rating = rating;
+        place.url = url;
+      });
   }
 
   setActiveMarker (text) {

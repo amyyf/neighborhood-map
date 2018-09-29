@@ -1,4 +1,4 @@
-/* global google fetch */
+/* global google */
 
 import React, { Component } from 'react';
 
@@ -16,39 +16,22 @@ class MapContainer extends Component {
   }
 
   populateInfoWindow () {
-    const venueId = this.props.activeMarker.id;
-    let address, description, name, priceTier, rating, url;
-    this.infoWindow.open(this.map, this.props.activeMarker);
-    fetch(
-      // `https://api.foursquare.com/v2/venues/${venueId}?client_id=SGZY43FDX4VZT0TPOSG55DMSI42CTGXCX4ENULJQ1HE4L2EY&client_secret=MX5RBBSUOTGVL1ZLTYL1ZWUDE1NKDTMKN4FIKI3U53NGH05M&v=20180922`
-    )
-      .then(results => results.json())
-      .then(response => {
-        console.log(response);
-        address = response.response.venue.location.address;
-        // TODO handle undefined description
-        description = response.response.venue.description;
-        name = response.response.venue.name;
-        // TODO display # of dollar signs for price tier
-        priceTier = response.response.venue.price.tier;
-        rating = response.response.venue.rating;
-        url = response.response.venue.url;
-        this.infoWindow.setContent(`
-          <h3>${name}</h3>
-          <h4>${address}</h4>
-          <p>${description}</p>
-          <p>Price: ${priceTier}</p>
-          <p>Rating: ${rating} / 10</p>
-          <a href='${url}'>Website</a>
-          `);
-      })
-      .catch(e => {
-        this.infoWindow.setContent(`
-          <h3>${this.props.activeMarker.title}</h3>
-          <p>There was an error retrieving additional data.</p>
-          `);
-        console.log(e);
-      });
+    const marker = this.props.activeMarker;
+    let venue;
+    for (let i = 0; i < this.props.places.length; i++) {
+      if (this.props.places[i].id === marker.id) {
+        venue = this.props.places[i];
+      }
+    }
+    this.infoWindow.open(this.map, marker);
+    this.infoWindow.setContent(`
+      <h3>${venue.name}</h3>
+      <h4>${venue.address}</h4>
+      <p>${venue.description}</p>
+      <p>Price: ${venue.priceTier}</p>
+      <p>Rating: ${venue.rating} / 10</p>
+      <a href='${venue.url}'>Website</a>
+    `);
   }
 
   renderMap (mapDiv) {
