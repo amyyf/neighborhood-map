@@ -103,8 +103,10 @@ class App extends Component {
       }
     ];
     this.setActivePlace = this.setActivePlace.bind(this);
+    this.setFilterValue = this.setFilterValue.bind(this);
     this.state = {
       activePlace: null,
+      filterValue: '',
       isLoaded: false
     };
   }
@@ -145,6 +147,11 @@ class App extends Component {
     this.setState({ activePlace: place });
   }
 
+  setFilterValue (event) {
+    const value = event.target.value;
+    this.setState({ filterValue: value }, () => console.log(this.state.filterValue));
+  }
+
   render () {
     return (
       <div className='App'>
@@ -156,7 +163,8 @@ class App extends Component {
           <section>
             <Filter
               isLoaded={this.state.isLoaded}
-              places={this.places}
+              setFilterValue={this.setFilterValue}
+              value={this.state.filterValue}
             />
             <List
               isLoaded={this.state.isLoaded}
