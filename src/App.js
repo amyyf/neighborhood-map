@@ -1,4 +1,4 @@
-/* global fetch google */
+/* global fetch */
 
 import React, { Component } from 'react';
 import './App.css';
@@ -156,6 +156,7 @@ class App extends Component {
           <section>
             <Filter
               isLoaded={this.state.isLoaded}
+              places={this.places}
             />
             <List
               isLoaded={this.state.isLoaded}
