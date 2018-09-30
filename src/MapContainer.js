@@ -12,6 +12,11 @@ class MapContainer extends Component {
       active: 'FFFF24',
       initial: '0091ff'
     };
+    this.state = {
+      markers: []
+    };
+    this.populateInfoWindow = this.populateInfoWindow.bind(this);
+    this.updateMarkers = this.updateMarkers.bind(this);
   }
 
   componentDidUpdate () {
@@ -19,7 +24,8 @@ class MapContainer extends Component {
     this.renderMap(mapDiv);
   }
 
-  populateInfoWindow (marker) {
+  populateInfoWindow () {
+    const marker = this.state.markers.find(marker => marker.place === this.props.activePlace);
     const venue = this.props.activePlace;
     let descrip;
     let price = '';
@@ -54,10 +60,15 @@ class MapContainer extends Component {
       });
       this.map = map;
     }
-    this.renderMarkers(this.map);
+    if (this.state.markers.length === 0) {
+      this.renderMarkers(this.map);
+    } else {
+      this.updateMarkers();
+    }
   }
 
   renderMarkers (map) {
+    let markers = [];
     this.props.places.forEach(place => {
       const isActivePlace = (place === this.props.activePlace);
       const position = place.position;
@@ -70,9 +81,29 @@ class MapContainer extends Component {
         icon: this.makeIcon(isActivePlace),
         id: id
       });
+      marker.place = place;
       marker.addListener('click', () => this.props.setActivePlace(place));
       if (isActivePlace) {
         this.populateInfoWindow(marker);
+      }
+      markers.push(marker);
+    });
+    this.setState({ markers: markers });
+  }
+
+  updateMarkers () {
+    const placeNames = this.props.places.map(place => place.name);
+    this.state.markers.forEach(marker => {
+      if (placeNames.includes(marker.title)) {
+        marker.addListener('click', () => this.props.setActivePlace(marker.place));
+        marker.setMap(this.map);
+      } else {
+        marker.setMap(null);
+      }
+      if (marker.place === this.props.activePlace) {
+        marker.setIcon(this.makeIcon(true));
+      } else {
+        marker.setIcon(this.makeIcon(false));
       }
     });
   }
@@ -93,7 +124,7 @@ class MapContainer extends Component {
       return null;
     }
     this.renderMap();
-    if (this.props.activeMarker) {
+    if (this.props.activePlace) {
       this.populateInfoWindow();
     }
     return (

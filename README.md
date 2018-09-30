@@ -16,6 +16,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Service Worker
 - attribute [Foursquare](https://developer.foursquare.com/docs/terms-of-use/attribution)
 - attribute Google Maps
+- add event listener for infowindow close to make marker color back to initial
 
 
 ## Places & Foursquare venue IDs / lat-longs

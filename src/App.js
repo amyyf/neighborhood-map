@@ -107,6 +107,7 @@ class App extends Component {
     this.state = {
       activePlace: null,
       filterValue: '',
+      filteredPlaces: this.places,
       isLoaded: false
     };
   }
@@ -149,7 +150,13 @@ class App extends Component {
 
   setFilterValue (event) {
     const value = event.target.value;
-    this.setState({ filterValue: value }, () => console.log(this.state.filterValue));
+    this.setState({ filterValue: value }, this.setFilteredPlaces);
+  }
+
+  setFilteredPlaces () {
+    this.setState({ filteredPlaces: this.places });
+    let filteredArr = this.places.filter(place => place.name.toLowerCase().includes(this.state.filterValue));
+    this.setState({ filteredPlaces: filteredArr }, () => console.log(this.state.filteredPlaces));
   }
 
   render () {
@@ -168,14 +175,14 @@ class App extends Component {
             />
             <List
               isLoaded={this.state.isLoaded}
-              places={this.places}
+              places={this.state.filteredPlaces}
               setActivePlace={this.setActivePlace}
             />
           </section>
           <MapContainer
             activePlace={this.state.activePlace}
-            places={this.places}
             isLoaded={this.state.isLoaded}
+            places={this.state.filteredPlaces}
             setActivePlace={this.setActivePlace}
           />
         </main>
