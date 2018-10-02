@@ -149,7 +149,11 @@ class App extends Component {
   }
 
   setFilterValue (value) {
-    this.setState({ filterValue: value }, this.setFilteredPlaces);
+    if (typeof value === 'number') {
+      console.log('this is a checkbox');
+    } else {
+      this.setState({ filterValue: value }, this.setFilteredPlaces);
+    }
   }
 
   setFilteredPlaces () {

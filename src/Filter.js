@@ -12,7 +12,11 @@ class Filter extends Component {
   }
 
   handleInputChange (event) {
-    const value = event.target.value;
+    let value = event.target.value;
+    // value from checkbox should remain of type number
+    if (event.target.type === 'checkbox') {
+      value = parseInt(value, 10);
+    }
     this.props.setFilterValue(value);
   }
 
@@ -31,7 +35,7 @@ class Filter extends Component {
           {this.checkboxes.map(checkbox => {
             const num = checkbox.slice(4);
             return (
-              <input type='checkbox' value={num} key={'checkbox' + num} onChange={this.handleCheckboxChange} />
+              <input type='checkbox' value={num} key={'checkbox' + num} onChange={this.handleInputChange} />
             );
           })}
         </label>
