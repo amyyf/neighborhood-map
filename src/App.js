@@ -153,7 +153,7 @@ class App extends Component {
   }
 
   setFilteredPlaces () {
-    this.setState({ filteredPlaces: this.places });
+    this.setState({ filteredPlaces: this.places }); // resets default list in order to filter
     let filteredArr = this.places.filter(place => place.name.toLowerCase().includes(this.state.filterValue));
     this.setState({ filteredPlaces: filteredArr }, () => console.log(this.state.filteredPlaces));
   }
