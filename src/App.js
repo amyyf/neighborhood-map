@@ -149,16 +149,17 @@ class App extends Component {
   }
 
   setFilterValue (value) {
-    if (typeof value === 'number') {
-      console.log('this is a checkbox');
-    } else {
-      this.setState({ filterValue: value }, this.setFilteredPlaces);
-    }
+    this.setState({ filterValue: value }, this.setFilteredPlaces);
   }
 
   setFilteredPlaces () {
     this.setState({ filteredPlaces: this.places }); // resets default list in order to filter
-    let filteredArr = this.places.filter(place => place.name.toLowerCase().includes(this.state.filterValue));
+    let filteredArr;
+    if (typeof this.state.filterValue === 'string') {
+      filteredArr = this.places.filter(place => place.name.toLowerCase().includes(this.state.filterValue));
+    } else if (typeof this.state.filterValue === 'number') {
+      filteredArr = this.places.filter(place => place.priceTier === this.state.filterValue);
+    }
     this.setState({ filteredPlaces: filteredArr }, () => console.log(this.state.filteredPlaces));
   }
 
