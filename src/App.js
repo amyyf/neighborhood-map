@@ -148,8 +148,7 @@ class App extends Component {
     this.setState({ activePlace: place });
   }
 
-  setFilterValue (event) {
-    const value = event.target.value;
+  setFilterValue (value) {
     this.setState({ filterValue: value }, this.setFilteredPlaces);
   }
 
