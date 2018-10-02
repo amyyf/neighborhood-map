@@ -149,7 +149,12 @@ class App extends Component {
   }
 
   setFilterValue (value) {
-    this.setState({ filterValue: value }, this.setFilteredPlaces);
+    // reset place list if the 'all' radio button is selected
+    if (value === 0) {
+      this.setState({ filterValue: '' }, this.setFilteredPlaces);
+    } else {
+      this.setState({ filterValue: value }, this.setFilteredPlaces);
+    }
   }
 
   setFilteredPlaces () {
@@ -160,7 +165,7 @@ class App extends Component {
     } else if (typeof this.state.filterValue === 'number') {
       filteredArr = this.places.filter(place => place.priceTier === this.state.filterValue);
     }
-    this.setState({ filteredPlaces: filteredArr }, () => console.log(this.state.filteredPlaces));
+    this.setState({ filteredPlaces: filteredArr });
   }
 
   render () {

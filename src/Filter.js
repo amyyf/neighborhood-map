@@ -3,28 +3,15 @@ import React, { Component } from 'react';
 class Filter extends Component {
   constructor (props) {
     super(props);
-    this.checkboxes = ['tier1', 'tier2', 'tier3', 'tier4'];
+    this.radios = ['tier0', 'tier1', 'tier2', 'tier3', 'tier4'];
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.state = {
-      checkboxChecked: false
-    };
-  }
-
-  handleCheckboxChange (event) {
-    console.log('clicked: ' + event.target.value);
   }
 
   handleInputChange (event) {
     let value = event.target.value;
-    // value from checkbox should remain of type number
-    if (event.target.type === 'checkbox') {
-      if (!this.state.checkboxChecked) {
-        value = parseInt(value, 10);
-        this.setState({ checkboxChecked: true });
-      } else {
-        value = '';
-        this.setState({ checkboxChecked: false });
-      }
+    // value from radio should remain type number
+    if (event.target.type === 'radio') {
+      value = parseInt(value, 10);
     }
     this.props.setFilterValue(value);
   }
@@ -41,10 +28,10 @@ class Filter extends Component {
         </label>
         <label>
           Filter by price:
-          {this.checkboxes.map(checkbox => {
-            const num = checkbox.slice(4);
+          {this.radios.map(radio => {
+            const num = radio.slice(4);
             return (
-              <input type='checkbox' value={num} key={'checkbox' + num} onChange={this.handleInputChange} />
+              <input type='radio' value={num} key={'radio' + num} name='priceRadio' onChange={this.handleInputChange} />
             );
           })}
         </label>
