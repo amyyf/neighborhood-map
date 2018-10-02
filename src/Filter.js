@@ -5,6 +5,9 @@ class Filter extends Component {
     super(props);
     this.checkboxes = ['tier1', 'tier2', 'tier3', 'tier4'];
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = {
+      checkboxChecked: false
+    };
   }
 
   handleCheckboxChange (event) {
@@ -15,7 +18,13 @@ class Filter extends Component {
     let value = event.target.value;
     // value from checkbox should remain of type number
     if (event.target.type === 'checkbox') {
-      value = parseInt(value, 10);
+      if (!this.state.checkboxChecked) {
+        value = parseInt(value, 10);
+        this.setState({ checkboxChecked: true });
+      } else {
+        value = '';
+        this.setState({ checkboxChecked: false });
+      }
     }
     this.props.setFilterValue(value);
   }
