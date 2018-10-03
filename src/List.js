@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const StyledList = styled.ul`
+  color: purple;
+`;
 
 class List extends Component {
   render () {
@@ -8,11 +13,11 @@ class List extends Component {
     const { places, setActivePlace } = this.props;
 
     return (
-      <ul aria-label='list of bars'>
+      <StyledList aria-label='list of bars'>
         {places.map(place => (
           <li key={place.id} onClick={() => setActivePlace(place)}>{place.name}</li>
         ))}
-      </ul>
+      </StyledList>
     );
   }
 }

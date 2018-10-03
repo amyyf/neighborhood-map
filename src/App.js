@@ -6,6 +6,15 @@ import Filter from './Filter.js';
 import List from './List.js';
 import LoadingPage from './LoadingPage.js';
 import MapContainer from './MapContainer.js';
+import styled from 'styled-components';
+
+const StyledHeader = styled.header`
+  background-color: black;
+`;
+
+const StyledSection = styled.section`
+  color: red;
+`;
 
 class App extends Component {
   constructor (props) {
@@ -171,13 +180,13 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <header className='App-header'>
+        <StyledHeader className='App-header'>
           <h1 className='App-title'>Ten of NYC's Oldest Bars</h1>
           <h2>A side of history with your beer?</h2>
-        </header>
+        </StyledHeader>
         <main>
           <LoadingPage isLoaded={this.state.isLoaded} />
-          <section>
+          <StyledSection>
             <h2 className='visually-hidden'>Filter the list of bars by name or price</h2>
             <Filter
               isLoaded={this.state.isLoaded}
@@ -189,7 +198,7 @@ class App extends Component {
               places={this.state.filteredPlaces}
               setActivePlace={this.setActivePlace}
             />
-          </section>
+          </StyledSection>
           <MapContainer
             activePlace={this.state.activePlace}
             isLoaded={this.state.isLoaded}

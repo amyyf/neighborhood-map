@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const StyledForm = styled.form`
+  color: blue;
+`;
 
 class Filter extends Component {
   constructor (props) {
@@ -27,7 +32,7 @@ class Filter extends Component {
       return null;
     }
     return (
-      <form>
+      <StyledForm>
         <label>
           Filter by name:
           <input type='text' value={this.props.value} onChange={this.handleInputChange} />
@@ -43,7 +48,7 @@ class Filter extends Component {
             );
           })}
         </label>
-      </form>
+      </StyledForm>
     );
   }
 }

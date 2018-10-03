@@ -57,7 +57,46 @@ class MapContainer extends Component {
     if (!this.map) {
       const map = new google.maps.Map(mapDiv, {
         center: {lat: 40.7413549, lng: -73.9980244},
-        zoom: 12
+        zoom: 12,
+        styles: [
+          {'elementType': 'labels.text.fill', 'stylers': [{'color': '#4d4b35'}]},
+          {'elementType': 'labels.text.stroke', 'stylers': [{'color': '#f2e4e1'}]},
+          {
+            'featureType': 'water',
+            'stylers': [
+              { 'color': '#b4c6b7' }
+            ]
+          },
+          {
+            'featureType': 'road.highway',
+            'stylers': [
+              { 'color': '#725244' },
+              { 'lightness': 50 }
+            ]
+          },
+          {
+            'featureType': 'road.arterial',
+            'stylers': [
+              { 'color': '#8c756b' },
+              { 'lightness': 50 }
+            ]
+          },
+          {
+            'featureType': 'poi.park',
+            'stylers': [
+              { 'color': '#c5c096' },
+              { 'lightness': 50 }
+            ]
+          },
+          {
+            'featureType': 'landscape.man_made',
+            'stylers': [
+              { 'color': '#c2af8a' },
+              { 'saturation': -25 },
+              { 'lightness': 50 }
+            ]
+          }
+        ]
       });
       this.map = map;
     }
