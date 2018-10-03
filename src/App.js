@@ -173,10 +173,12 @@ class App extends Component {
       <div className='App'>
         <header className='App-header'>
           <h1 className='App-title'>Ten of NYC's Oldest Bars</h1>
+          <h2>A side of history with your beer?</h2>
         </header>
         <main>
           <LoadingPage isLoaded={this.state.isLoaded} />
           <section>
+            <h2 className='visually-hidden'>Filter the list of bars by name or price</h2>
             <Filter
               isLoaded={this.state.isLoaded}
               setFilterValue={this.setFilterValue}

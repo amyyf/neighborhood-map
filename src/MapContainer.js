@@ -130,7 +130,7 @@ class MapContainer extends Component {
       this.populateInfoWindow();
     }
     return (
-      <div ref={this.mapDiv} style={{width: 500, height: 500}} />
+      <div aria-label='map' role='application' ref={this.mapDiv} style={{width: 500, height: 500}} />
     );
   }
 }

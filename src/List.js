@@ -8,13 +8,11 @@ class List extends Component {
     const { places, setActivePlace } = this.props;
 
     return (
-      <div>
-        <ul>
-          {places.map(place => (
-            <li key={place.id} onClick={() => setActivePlace(place)}>{place.name}</li>
-          ))}
-        </ul>
-      </div>
+      <ul aria-label='list of bars'>
+        {places.map(place => (
+          <li key={place.id} onClick={() => setActivePlace(place)}>{place.name}</li>
+        ))}
+      </ul>
     );
   }
 }
