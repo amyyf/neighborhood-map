@@ -47,6 +47,7 @@ class MapContainer extends Component {
       <p>Rating: ${venue.rating} / 10</p>
       <a href='${venue.url}'>Website</a>
     `);
+    this.infoWindow.addListener('closeclick', () => this.props.setActivePlace(null));
   }
 
   renderMap (mapDiv) {
