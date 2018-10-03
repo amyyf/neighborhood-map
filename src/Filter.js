@@ -3,13 +3,19 @@ import React, { Component } from 'react';
 class Filter extends Component {
   constructor (props) {
     super(props);
-    this.radios = ['tier0', 'tier1', 'tier2', 'tier3', 'tier4'];
+    this.radios = [
+      {tier: '0', name: 'All'},
+      {tier: '1', name: '$'},
+      {tier: '2', name: '$$'},
+      {tier: '3', name: '$$$'},
+      {tier: '4', name: '$$$$'}
+    ];
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange (event) {
     let value = event.target.value;
-    // value from radio should remain type number
+    // value from radio should be a number
     if (event.target.type === 'radio') {
       value = parseInt(value, 10);
     }
@@ -21,7 +27,7 @@ class Filter extends Component {
       return null;
     }
     return (
-      <React.Fragment>
+      <form>
         <label>
           Filter by name:
           <input type='text' value={this.props.value} onChange={this.handleInputChange} />
@@ -29,13 +35,15 @@ class Filter extends Component {
         <label>
           Filter by price:
           {this.radios.map(radio => {
-            const num = radio.slice(4);
             return (
-              <input type='radio' value={num} key={'radio' + num} name='priceRadio' onChange={this.handleInputChange} />
+              <label key={'radio' + radio.tier}>
+                {radio.name}
+                <input type='radio' value={radio.tier} name='priceRadio' onChange={this.handleInputChange} />
+              </label>
             );
           })}
         </label>
-      </React.Fragment>
+      </form>
     );
   }
 }
