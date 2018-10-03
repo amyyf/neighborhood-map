@@ -6,6 +6,7 @@ class MapContainer extends Component {
   constructor (props) {
     super(props);
     this.infoWindow = new google.maps.InfoWindow();
+    this.infoWindow.addListener('closeclick', () => this.props.setActivePlace(null));
     this.map = null;
     this.mapDiv = React.createRef();
     this.markerColor = {
@@ -47,7 +48,6 @@ class MapContainer extends Component {
       <p>Rating: ${venue.rating} / 10</p>
       <a href='${venue.url}'>Website</a>
     `);
-    this.infoWindow.addListener('closeclick', () => this.props.setActivePlace(null));
   }
 
   renderMap (mapDiv) {
@@ -83,7 +83,9 @@ class MapContainer extends Component {
         id: id
       });
       marker.place = place;
-      marker.addListener('click', () => this.props.setActivePlace(place));
+      marker.addListener('click', () => {
+        this.props.setActivePlace(place);
+      });
       if (isActivePlace) {
         this.populateInfoWindow(marker);
       }
@@ -96,7 +98,6 @@ class MapContainer extends Component {
     const placeNames = this.props.places.map(place => place.name);
     this.state.markers.forEach(marker => {
       if (placeNames.includes(marker.title)) {
-        marker.addListener('click', () => this.props.setActivePlace(marker.place));
         marker.setMap(this.map);
       } else {
         marker.setMap(null);
