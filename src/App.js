@@ -8,12 +8,34 @@ import LoadingPage from './LoadingPage.js';
 import MapContainer from './MapContainer.js';
 import styled from 'styled-components';
 
+const StyledMenu = styled.div`
+  background-color: white;
+  position: absolute;
+  top: 2em;
+  transform: translateY(${props => props.open ? 0 : -100}%);
+  transition: transform 0.5s ease-out;
+`;
+
+const StyledMenuButton = styled.button`
+  background-color: blue;
+  font-size: 1em;
+  height: 2em;
+  position: relative;
+  z-index: 2;
+`;
+
 const StyledHeader = styled.header`
   background-color: black;
+  position: relative;
+  z-index: 5;
 `;
 
 const StyledSection = styled.section`
   color: red;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
 `;
 
 class App extends Component {
@@ -113,11 +135,13 @@ class App extends Component {
     ];
     this.setActivePlace = this.setActivePlace.bind(this);
     this.setFilterValue = this.setFilterValue.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
     this.state = {
       activePlace: null,
       filterValue: '',
       filteredPlaces: this.places,
-      isLoaded: false
+      isLoaded: false,
+      isMenuOpen: false
     };
   }
 
@@ -177,6 +201,10 @@ class App extends Component {
     this.setState({ filteredPlaces: filteredArr });
   }
 
+  toggleMenu () {
+    this.setState(currentState => ({ isMenuOpen: !currentState.isMenuOpen }));
+  }
+
   render () {
     return (
       <div className='App'>
@@ -186,18 +214,22 @@ class App extends Component {
         </StyledHeader>
         <main>
           <LoadingPage isLoaded={this.state.isLoaded} />
-          <StyledSection>
-            <h2 className='visually-hidden'>Filter the list of bars by name or price</h2>
-            <Filter
-              isLoaded={this.state.isLoaded}
-              setFilterValue={this.setFilterValue}
-              value={this.state.filterValue}
-            />
-            <List
-              isLoaded={this.state.isLoaded}
-              places={this.state.filteredPlaces}
-              setActivePlace={this.setActivePlace}
-            />
+          <StyledSection aria-label='filter the list of bars by name or price'>
+            <StyledMenuButton onClick={this.toggleMenu}>
+              {this.state.isMenuOpen ? 'Hide' : 'Show'} filter menu
+            </StyledMenuButton>
+            <StyledMenu open={this.state.isMenuOpen}>
+              <Filter
+                isLoaded={this.state.isLoaded}
+                setFilterValue={this.setFilterValue}
+                value={this.state.filterValue}
+              />
+              <List
+                isLoaded={this.state.isLoaded}
+                places={this.state.filteredPlaces}
+                setActivePlace={this.setActivePlace}
+              />
+            </StyledMenu>
           </StyledSection>
           <MapContainer
             activePlace={this.state.activePlace}
