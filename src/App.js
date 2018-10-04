@@ -15,6 +15,8 @@ import styled from 'styled-components';
 const StyledApp = styled.div`
   height: 100vh;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 `;
 
 const StyledMain = styled.main`
@@ -30,18 +32,36 @@ const StyledMenu = styled.div`
 `;
 
 const StyledMenuButton = styled.button`
-  background-color: blue;
+  background-color: #d4b766;
+  border: 1px solid #645c56;
   font-size: 1em;
-  height: 2em;
+  font-family: 'Special Elite',cursive;
+  height: 3em;
   position: relative;
   z-index: 2;
 `;
 
 const StyledHeader = styled.header`
-  background-color: black;
+  background-color: #e2cf9f;
+  color: black;
   height: 25vh;
   position: relative;
+  text-align: center;
   z-index: 5;
+
+  > h1 {
+    font-family: 'Special Elite',cursive;
+    font-size: 2.5em;
+    margin: 0;
+    padding: 0.5em;
+    padding-bottom: 0.25em;
+  }
+
+  > h2 {
+    font-family: 'Josefin Slab', serif;
+    font-style: italic;
+    margin: 0;
+  };
 `;
 
 const StyledSection = styled.section`
@@ -230,7 +250,7 @@ class App extends Component {
           <LoadingPage isLoaded={this.state.isLoaded} />
           <StyledSection aria-label='filter the list of bars by name or price'>
             <StyledMenuButton onClick={this.toggleMenu}>
-              {this.state.isMenuOpen ? 'Hide' : 'Show'} filter menu
+              {this.state.isMenuOpen ? 'HIDE' : 'SHOW'} FILTER MENU
             </StyledMenuButton>
             <StyledMenu open={this.state.isMenuOpen}>
               <Filter
