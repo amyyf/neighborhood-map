@@ -8,6 +8,19 @@ import LoadingPage from './LoadingPage.js';
 import MapContainer from './MapContainer.js';
 import styled from 'styled-components';
 
+/* breakpoints:
+500width: filter menu display list of places on right, filter options on left as columns; header gets less height
+800width: filter menu displays on left instead of center
+*/
+const StyledApp = styled.div`
+  height: 100vh;
+  overflow: hidden;
+`;
+
+const StyledMain = styled.main`
+  height: 75vh;
+`;
+
 const StyledMenu = styled.div`
   background-color: white;
   position: absolute;
@@ -26,6 +39,7 @@ const StyledMenuButton = styled.button`
 
 const StyledHeader = styled.header`
   background-color: black;
+  height: 25vh;
   position: relative;
   z-index: 5;
 `;
@@ -207,12 +221,12 @@ class App extends Component {
 
   render () {
     return (
-      <div className='App'>
+      <StyledApp>
         <StyledHeader className='App-header'>
           <h1 className='App-title'>Ten of NYC's Oldest Bars</h1>
           <h2>A side of history with your beer?</h2>
         </StyledHeader>
-        <main>
+        <StyledMain>
           <LoadingPage isLoaded={this.state.isLoaded} />
           <StyledSection aria-label='filter the list of bars by name or price'>
             <StyledMenuButton onClick={this.toggleMenu}>
@@ -237,8 +251,8 @@ class App extends Component {
             places={this.state.filteredPlaces}
             setActivePlace={this.setActivePlace}
           />
-        </main>
-      </div>
+        </StyledMain>
+      </StyledApp>
     );
   }
 }

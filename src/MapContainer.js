@@ -1,6 +1,15 @@
 /* global google */
 
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const StyledMapDiv = styled.div`
+  height: 100%;
+
+  > * {
+    height: 100%;
+  }
+`;
 
 class MapContainer extends Component {
   constructor (props) {
@@ -57,7 +66,7 @@ class MapContainer extends Component {
     if (!this.map) {
       const map = new google.maps.Map(mapDiv, {
         center: {lat: 40.7413549, lng: -73.9980244},
-        zoom: 12,
+        zoom: 15,
         styles: [
           {'elementType': 'labels.text.fill', 'stylers': [{'color': '#4d4b35'}]},
           {'elementType': 'labels.text.stroke', 'stylers': [{'color': '#f2e4e1'}]},
@@ -108,6 +117,7 @@ class MapContainer extends Component {
   }
 
   renderMarkers (map) {
+    let bounds = new google.maps.LatLngBounds();
     let markers = [];
     this.props.places.forEach(place => {
       const isActivePlace = (place === this.props.activePlace);
@@ -128,8 +138,10 @@ class MapContainer extends Component {
       if (isActivePlace) {
         this.populateInfoWindow(marker);
       }
+      bounds.extend(marker.position);
       markers.push(marker);
     });
+    map.fitBounds(bounds);
     this.setState({ markers: markers });
   }
 
@@ -169,7 +181,9 @@ class MapContainer extends Component {
       this.populateInfoWindow();
     }
     return (
-      <div aria-label='map' role='application' ref={this.mapDiv} style={{width: 500, height: 500}} />
+      <StyledMapDiv>
+        <div aria-label='map' role='application' ref={this.mapDiv} />
+      </StyledMapDiv>
     );
   }
 }
