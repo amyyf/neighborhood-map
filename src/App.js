@@ -51,7 +51,7 @@ const StyledHeader = styled.header`
 
   > h1 {
     font-family: 'Special Elite',cursive;
-    font-size: 2.5em;
+    font-size: 2em;
     margin: 0;
     padding: 0.5em;
     padding-bottom: 0.25em;

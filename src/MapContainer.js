@@ -105,7 +105,12 @@ class MapContainer extends Component {
               { 'lightness': 50 }
             ]
           }
-        ]
+        ],
+        disableDefaultUI: true,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: google.maps.ControlPosition.TOP_RIGHT
+        }
       });
       this.map = map;
     }
