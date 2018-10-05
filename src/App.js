@@ -24,11 +24,13 @@ const StyledMain = styled.main`
 `;
 
 const StyledMenu = styled.div`
-  background-color: white;
+  background-color: #f9f0dc;
+  padding: 0.5em;
   position: absolute;
-  top: 2em;
+  top: 3em;
   transform: translateY(${props => props.open ? 0 : -100}%);
   transition: transform 0.5s ease-out;
+  width: 100vw;
 `;
 
 const StyledMenuButton = styled.button`

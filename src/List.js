@@ -2,7 +2,28 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledList = styled.ul`
-  color: purple;
+  color: #645c56;
+  font-family: 'Josefin Slab',serif;
+  list-style: none;
+  font-size: 1.25em;
+  margin: 0;
+  padding: 0.5em;
+  display: flex;
+  flex-flow: row wrap;
+
+  > li {
+    padding: 0.25em;
+    letter-spacing: -0.01em;
+  }
+
+  > li::after {
+    content: ' |';
+  }
+
+  > li:hover {
+    background-color: white;
+    color: black;
+  }
 `;
 
 class List extends Component {

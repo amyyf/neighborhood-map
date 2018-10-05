@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-  color: blue;
+  color: #645c56;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Special Elite',cursive;
+
+  > :first-child {
+    padding-bottom: 0.5em;
+  }
+
+  > :last-child {
+    display: flex;
+    flex-flow: row wrap;
+  }
 `;
 
 class Filter extends Component {
@@ -42,8 +54,8 @@ class Filter extends Component {
           {this.radios.map(radio => {
             return (
               <label key={'radio' + radio.tier}>
-                {radio.name}
                 <input type='radio' value={radio.tier} name='priceRadio' onChange={this.handleInputChange} />
+                {radio.name}
               </label>
             );
           })}
