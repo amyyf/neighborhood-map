@@ -36,7 +36,10 @@ class List extends Component {
     return (
       <StyledList aria-label='list of bars'>
         {places.map(place => (
-          <li key={place.id} onClick={() => setActivePlace(place)}>{place.name}</li>
+          <li key={place.id} onClick={() => {
+            setActivePlace(place);
+            this.props.toggleMenu();
+          }}>{place.name}</li>
         ))}
       </StyledList>
     );

@@ -18,6 +18,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - attribute Google Maps
 - add event listener for infowindow close to make marker color back to initial
 
+if menu is open and active place changes, toggle menu
+if infowindow is open and menu opens, clear infowindow
+
 
 ## Places & Foursquare venue IDs / lat-longs
 1. Fraunces Tavern - 507f06e9e4b0d2368fcbada4, "lat": 40.70352594119276, "lng": -74.01139528322373

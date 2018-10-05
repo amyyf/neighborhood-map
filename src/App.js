@@ -264,6 +264,7 @@ class App extends Component {
                 isLoaded={this.state.isLoaded}
                 places={this.state.filteredPlaces}
                 setActivePlace={this.setActivePlace}
+                toggleMenu={this.toggleMenu}
               />
             </StyledMenu>
           </StyledSection>

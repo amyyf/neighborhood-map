@@ -14,7 +14,9 @@ const StyledMapDiv = styled.div`
 class MapContainer extends Component {
   constructor (props) {
     super(props);
-    this.infoWindow = new google.maps.InfoWindow();
+    this.infoWindow = new google.maps.InfoWindow({
+      maxWidth: 250
+    });
     this.infoWindow.addListener('closeclick', () => this.props.setActivePlace(null));
     this.map = null;
     this.mapDiv = React.createRef();
@@ -109,7 +111,7 @@ class MapContainer extends Component {
         disableDefaultUI: true,
         zoomControl: true,
         zoomControlOptions: {
-          position: google.maps.ControlPosition.TOP_RIGHT
+          position: google.maps.ControlPosition.TOP_LEFT
         }
       });
       this.map = map;
