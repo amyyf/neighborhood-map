@@ -21,6 +21,10 @@ const StyledApp = styled.div`
 
 const StyledMain = styled.main`
   height: 75vh;
+
+  @media screen and (min-width: 500px) {
+    height: 85vh;
+  }
 `;
 
 const StyledMenu = styled.div`
@@ -31,6 +35,11 @@ const StyledMenu = styled.div`
   transform: translateY(${props => props.open ? 0 : -100}%);
   transition: transform 0.5s ease-out;
   width: 100vw;
+
+  @media screen and (min-width: 500px) {
+    display: flex;
+    flex-flow: row nowrap;
+  }
 `;
 
 const StyledMenuButton = styled.button`
@@ -64,6 +73,10 @@ const StyledHeader = styled.header`
     font-style: italic;
     margin: 0;
   };
+
+  @media screen and (min-width: 500px) {
+    height: 15vh;
+  }
 `;
 
 const StyledSection = styled.section`

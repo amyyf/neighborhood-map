@@ -24,6 +24,10 @@ const StyledList = styled.ul`
     background-color: white;
     color: black;
   }
+
+  @media screen and (min-width: 500px) {
+    flex-shrink: 1;
+  }
 `;
 
 class List extends Component {

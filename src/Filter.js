@@ -15,6 +15,10 @@ const StyledForm = styled.form`
     display: flex;
     flex-flow: row wrap;
   }
+
+  @media screen and (min-width: 500px) {
+    flex-grow: 0;
+  }
 `;
 
 class Filter extends Component {
