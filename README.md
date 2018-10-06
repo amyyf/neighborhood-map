@@ -57,10 +57,13 @@ request URL:  https://api.foursquare.com/v2/venues/VENUEID?client_id=ID&client_s
 
 ## Dependencies and resources
 
-I used [Foursquare's API](https://developer.foursquare.com/docs/terms-of-use/attribution) to get additional place data for my venues and [GoogleMaps's API](https://developers.google.com/maps/documentation/) for the map.
-
-I worked with [Styled Components](https://www.styled-components.com/) for the first time and found their library to be really helpful with React.
+APIs and libraries:
+- [Foursquare's API](https://developer.foursquare.com/docs/terms-of-use/attribution) to get additional place data for the venues
+- [GoogleMaps's API](https://developers.google.com/maps/documentation/) for the map
+- [Styled Components](https://www.styled-components.com/) for cleanly blending CSS with React
 
 I referred to [Cuneyt Aliustaoglu's article](http://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/) for tips on using Google Maps with React without using custom libraries.
 
 I modified code from [Udacity's course](https://github.com/udacity/ud864/blob/master/Project_Code_5_BeingStylish.html) on working with Google Maps API to change the color of my active marker.
+
+My custom map markers and favicon were created by [Steven Frieson](stevenfrieson.com).

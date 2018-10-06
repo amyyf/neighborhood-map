@@ -191,14 +191,11 @@ class MapContainer extends Component {
   }
 
   makeIcon (isActive) {
-    let markerColor = isActive ? this.markerColor.active : this.markerColor.initial;
-    const markerImage = new google.maps.MarkerImage(
-      `http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|${markerColor}|40|_|%E2%80%A2`,
-      new google.maps.Size(21, 34),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(10, 34),
-      new google.maps.Size(21, 34));
-    return markerImage;
+    const icons = {
+      active: './beer-mug_full.png',
+      notActive: './beer-mug_empty.png'
+    };
+    return isActive ? icons.active : icons.notActive;
   }
 
   render () {
