@@ -6,7 +6,11 @@ class LoadingPage extends Component {
       return null;
     }
     return (
-      <h1>Loading</h1>
+      <React.Fragment>
+        <h1>Loading</h1>
+        <p>There may be an issue with the network connection.</p>
+        <p>Try reloading this page or checking your connection speed.</p>
+      </React.Fragment>
     );
   }
 }

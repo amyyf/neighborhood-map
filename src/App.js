@@ -8,10 +8,6 @@ import LoadingPage from './LoadingPage.js';
 import MapContainer from './MapContainer.js';
 import styled from 'styled-components';
 
-/* breakpoints:
-500width: filter menu display list of places on right, filter options on left as columns; header gets less height
-850width: filter menu displays on left instead of center
-*/
 const StyledApp = styled.div`
   height: 100vh;
   overflow: hidden;
@@ -238,6 +234,10 @@ class App extends Component {
         place.priceTier = priceTier;
         place.rating = rating;
         place.url = url;
+      })
+      .catch(e => {
+        this.setState({ isLoaded: false });
+        console.log(e);
       });
   }
 

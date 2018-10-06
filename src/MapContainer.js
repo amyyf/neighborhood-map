@@ -63,6 +63,9 @@ class MapContainer extends Component {
       <p>Price: ${price}</p>
       <p>Rating: ${venue.rating} / 10</p>
       <a href='${venue.url}'>Website</a>
+      <br>
+      <br>
+      <img src='./powered-by-foursquare-grey.png' alt='powered by foursquare' href='https://foursquare.com/' width=200 />
     `);
   }
 
