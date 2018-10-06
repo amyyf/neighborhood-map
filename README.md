@@ -6,7 +6,7 @@ Many people come to New York City to learn about its history. Many people also l
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Clone or fork the project, `cd` into the project directory, and run:
+Clone or download the project, `cd` into the project directory, and run:
 
 #### `npm start`
 
