@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 /* breakpoints:
 500width: filter menu display list of places on right, filter options on left as columns; header gets less height
-800width: filter menu displays on left instead of center
+850width: filter menu displays on left instead of center
 */
 const StyledApp = styled.div`
   height: 100vh;
@@ -24,6 +24,11 @@ const StyledMain = styled.main`
 
   @media screen and (min-width: 500px) {
     height: 85vh;
+  }
+
+  @media screen and (min-width: 850px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -40,6 +45,13 @@ const StyledMenu = styled.div`
     display: flex;
     flex-flow: row nowrap;
   }
+
+  @media screen and (min-width: 850px) {
+    flex-flow: row wrap;
+    top: 0;
+    transform: none;
+    width: 30vw;
+  }
 `;
 
 const StyledMenuButton = styled.button`
@@ -50,6 +62,10 @@ const StyledMenuButton = styled.button`
   height: 3em;
   position: relative;
   z-index: 2;
+
+  @media screen and (min-width: 850px) {
+    display: none;
+  }
 `;
 
 const StyledHeader = styled.header`
@@ -80,7 +96,6 @@ const StyledHeader = styled.header`
 `;
 
 const StyledSection = styled.section`
-  color: red;
   display: flex;
   flex-direction: column;
   position: relative;

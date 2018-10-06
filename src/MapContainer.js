@@ -4,9 +4,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledMapDiv = styled.div`
-  height: 100%;
+  height: calc(100% - 3em);
 
-  > * {
+  > div {
+    height: 100%;
+  }
+
+  @media screen and (min-width: 850px) {
     height: 100%;
   }
 `;
@@ -25,6 +29,7 @@ class MapContainer extends Component {
       initial: '0091ff'
     };
     this.state = {
+      isDesktop: window.innerHeight > 850,
       markers: []
     };
     this.populateInfoWindow = this.populateInfoWindow.bind(this);
@@ -93,10 +98,17 @@ class MapContainer extends Component {
             ]
           },
           {
+            'featureType': 'road',
+            'elementType': 'labels.icon',
+            'stylers': [
+              { 'visibility': 'off' }
+            ]
+          },
+          {
             'featureType': 'poi.park',
             'stylers': [
-              { 'color': '#c5c096' },
-              { 'lightness': 50 }
+              { 'color': '#bab89f' },
+              { 'lightness': 25 }
             ]
           },
           {
@@ -106,12 +118,19 @@ class MapContainer extends Component {
               { 'saturation': -25 },
               { 'lightness': 50 }
             ]
+          },
+          {
+            'featureType': 'poi',
+            'elementType': 'labels.icon',
+            'stylers': [
+              { 'visibility': 'off' }
+            ]
           }
         ],
         disableDefaultUI: true,
         zoomControl: true,
         zoomControlOptions: {
-          position: google.maps.ControlPosition.TOP_LEFT
+          position: google.maps.ControlPosition.RIGHT_BOTTOM
         }
       });
       this.map = map;
