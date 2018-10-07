@@ -1,19 +1,7 @@
 /* global google */
 
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-const StyledMapDiv = styled.div`
-  height: calc(100% - 3em);
-
-  > div {
-    height: 100%;
-  }
-
-  @media screen and (min-width: 850px) {
-    height: 100%;
-  }
-`;
+import { StyledMapDiv } from './Styles.js';
 
 class MapContainer extends Component {
   constructor (props) {
@@ -36,9 +24,79 @@ class MapContainer extends Component {
     this.updateMarkers = this.updateMarkers.bind(this);
   }
 
+  componentDidMount () {
+    const map = new google.maps.Map(this.mapDiv.current, {
+      center: {lat: 40.7413549, lng: -73.9980244},
+      zoom: 15,
+      styles: [
+        {'elementType': 'labels.text.fill', 'stylers': [{'color': '#4d4b35'}]},
+        {'elementType': 'labels.text.stroke', 'stylers': [{'color': '#f2e4e1'}]},
+        {
+          'featureType': 'water',
+          'stylers': [
+            { 'color': '#b4c6b7' }
+          ]
+        },
+        {
+          'featureType': 'road.highway',
+          'stylers': [
+            { 'color': '#725244' },
+            { 'lightness': 50 }
+          ]
+        },
+        {
+          'featureType': 'road.arterial',
+          'stylers': [
+            { 'color': '#8c756b' },
+            { 'lightness': 50 }
+          ]
+        },
+        {
+          'featureType': 'road',
+          'elementType': 'labels.icon',
+          'stylers': [
+            { 'visibility': 'off' }
+          ]
+        },
+        {
+          'featureType': 'poi.park',
+          'stylers': [
+            { 'color': '#bab89f' },
+            { 'lightness': 25 }
+          ]
+        },
+        {
+          'featureType': 'landscape.man_made',
+          'stylers': [
+            { 'color': '#c2af8a' },
+            { 'saturation': -25 },
+            { 'lightness': 50 }
+          ]
+        },
+        {
+          'featureType': 'poi',
+          'elementType': 'labels.icon',
+          'stylers': [
+            { 'visibility': 'off' }
+          ]
+        }
+      ],
+      disableDefaultUI: true,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_BOTTOM
+      }
+    });
+    this.map = map;
+    if (this.state.markers.length === 0) {
+      this.renderMarkers(this.map);
+    }
+  }
+
   componentDidUpdate () {
-    const mapDiv = this.mapDiv.current;
-    this.renderMap(mapDiv);
+    if (this.state.markers) {
+      this.updateMarkers();
+    }
   }
 
   populateInfoWindow () {
@@ -67,82 +125,6 @@ class MapContainer extends Component {
       <br>
       <img src='./powered-by-foursquare-grey.png' alt='powered by foursquare' href='https://foursquare.com/' width=200 />
     `);
-  }
-
-  renderMap (mapDiv) {
-    if (!mapDiv) {
-      return;
-    }
-    if (!this.map) {
-      const map = new google.maps.Map(mapDiv, {
-        center: {lat: 40.7413549, lng: -73.9980244},
-        zoom: 15,
-        styles: [
-          {'elementType': 'labels.text.fill', 'stylers': [{'color': '#4d4b35'}]},
-          {'elementType': 'labels.text.stroke', 'stylers': [{'color': '#f2e4e1'}]},
-          {
-            'featureType': 'water',
-            'stylers': [
-              { 'color': '#b4c6b7' }
-            ]
-          },
-          {
-            'featureType': 'road.highway',
-            'stylers': [
-              { 'color': '#725244' },
-              { 'lightness': 50 }
-            ]
-          },
-          {
-            'featureType': 'road.arterial',
-            'stylers': [
-              { 'color': '#8c756b' },
-              { 'lightness': 50 }
-            ]
-          },
-          {
-            'featureType': 'road',
-            'elementType': 'labels.icon',
-            'stylers': [
-              { 'visibility': 'off' }
-            ]
-          },
-          {
-            'featureType': 'poi.park',
-            'stylers': [
-              { 'color': '#bab89f' },
-              { 'lightness': 25 }
-            ]
-          },
-          {
-            'featureType': 'landscape.man_made',
-            'stylers': [
-              { 'color': '#c2af8a' },
-              { 'saturation': -25 },
-              { 'lightness': 50 }
-            ]
-          },
-          {
-            'featureType': 'poi',
-            'elementType': 'labels.icon',
-            'stylers': [
-              { 'visibility': 'off' }
-            ]
-          }
-        ],
-        disableDefaultUI: true,
-        zoomControl: true,
-        zoomControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_BOTTOM
-        }
-      });
-      this.map = map;
-    }
-    if (this.state.markers.length === 0) {
-      this.renderMarkers(this.map);
-    } else {
-      this.updateMarkers();
-    }
   }
 
   renderMarkers (map) {
@@ -199,10 +181,6 @@ class MapContainer extends Component {
   }
 
   render () {
-    if (!this.props.isLoaded) {
-      return null;
-    }
-    this.renderMap();
     if (this.props.activePlace) {
       this.populateInfoWindow();
     }

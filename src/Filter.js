@@ -1,25 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-const StyledForm = styled.form`
-  color: #645c56;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Special Elite',cursive;
-
-  > :first-child {
-    padding-bottom: 0.5em;
-  }
-
-  > :last-child {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  @media screen and (min-width: 500px) {
-    flex-grow: 0;
-  }
-`;
+import { StyledForm } from './Styles.js';
 
 class Filter extends Component {
   constructor (props) {
@@ -44,9 +24,6 @@ class Filter extends Component {
   }
 
   render () {
-    if (!this.props.isLoaded) {
-      return null;
-    }
     return (
       <StyledForm>
         <label>
@@ -70,10 +47,3 @@ class Filter extends Component {
 }
 
 export default Filter;
-
-// checkboxes exist in state - whether checked or not
-// if they are an array, I can loop over them to render
-// they have a handleCheck method to extract their value, which is passed up to the app filter
-// app filter needs to know how to handle this value - maybe differently than the text filter
-// but it can still use the same filterPlaces function to render the relevant places
-// maybe pass in input type (or source) to filterValue function to pass along to filterPlaces

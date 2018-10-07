@@ -2,8 +2,21 @@
 
 const cacheName = 'fetchedData';
 
+const urlsToCache = [
+  '/'
+];
+
+self.addEventListener('install', function (event) {
+  event.waitUntil(
+    caches.open(cacheName)
+      .then(function (cache) {
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
 self.addEventListener('fetch', function (event) {
-  if (event.request.url.includes('foursquare')) {
+  if (event.request.url.includes('foursquare') || event.request.url.includes('googleapis')) {
     event.respondWith(returnRequest(event.request));
   } else {
     event.respondWith(fetch(event.request));
