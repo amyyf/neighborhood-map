@@ -26,11 +26,14 @@ class App extends Component {
       isMenuOpen: false,
       places: []
     };
-    window.gm_authFailure = function () {
+    window.addEventListener('error', () => {
+      this.setState({ isErrored: true });
+    });
+    window.gm_authFailure = () => {
       this.setState({ isErrored: true });
     };
     if (!('google' in window)) {
-      window.googleIsLoaded = function () {
+      window.isGoogleLoaded = () => {
         this.setState({ isGoogleLoaded: true });
       };
     }
@@ -117,7 +120,7 @@ class App extends Component {
           <h2>A side of history with your beer?</h2>
         </StyledHeader>
         {this.state.isErrored && <ErrorPage />}
-        <StyledMain>
+        {!this.state.isErrored && <StyledMain>
           {(this.state.isGoogleLoaded && this.state.isFoursquareLoaded)
             ? (
               <React.Fragment>
@@ -146,7 +149,7 @@ class App extends Component {
             )
             : <LoadingPage />
           }
-        </StyledMain>
+        </StyledMain>}
       </StyledApp>
     );
   }

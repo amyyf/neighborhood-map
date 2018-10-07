@@ -6,12 +6,18 @@ class List extends Component {
     const { places, setActivePlace } = this.props;
 
     return (
-      <StyledList aria-label='list of bars'>
+      <StyledList aria-label='list of bars' role='listbox'>
         {places.map(place => (
-          <li key={place.id} tabIndex='0' onClick={() => {
-            setActivePlace(place);
-            this.props.toggleMenu();
-          }}>{place.name}</li>
+          <li key={place.id}>
+            <button
+              onClick={() => {
+                setActivePlace(place);
+                this.props.toggleMenu();
+              }}
+            >
+              {place.name}
+            </button>
+          </li>
         ))}
       </StyledList>
     );

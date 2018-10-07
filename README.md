@@ -15,6 +15,12 @@ Clone or download the project, `cd` into the project directory, and run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+You can alternatively run:
+
+#### `npm run build`
+
+to deploy the production build of the app. Run it with a simple HTTP server from the directory.
+
 ## Dependencies and resources
 
 APIs and libraries:
