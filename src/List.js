@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyledList } from './Styles.js';
+import { StyledList, ListButton } from './Styles.js';
 
 class List extends Component {
   render () {
@@ -9,14 +9,14 @@ class List extends Component {
       <StyledList aria-label='list of bars' role='listbox'>
         {places.map(place => (
           <li key={place.id}>
-            <button
+            <ListButton
               onClick={() => {
                 setActivePlace(place);
                 this.props.toggleMenu();
               }}
             >
               {place.name}
-            </button>
+            </ListButton>
           </li>
         ))}
       </StyledList>

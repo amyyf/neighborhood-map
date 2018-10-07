@@ -9,7 +9,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Clone or download the project, `cd` into the project directory, and run:
 
 #### `npm install`
-
 #### `npm start`
 
 Runs the app in the development mode.<br>
@@ -19,7 +18,12 @@ You can alternatively run:
 
 #### `npm run build`
 
-to deploy the production build of the app. Run it with a simple HTTP server from the directory.
+to deploy the production build of the app. Create-React-App recommends serving the production build with:
+
+#### `npm install -g serve`
+#### `serve -s build`
+
+This project utilizes a service worker from Create-React-App that ONLY works in the production build.
 
 ## Dependencies and resources
 

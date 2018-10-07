@@ -139,11 +139,6 @@ export const StyledList = styled.ul`
   display: flex;
   flex-flow: row wrap;
 
-  > li {
-    padding: 0.25em;
-    letter-spacing: -0.01em;
-  }
-
   > li::after {
     content: ' |';
   }
@@ -156,4 +151,13 @@ export const StyledList = styled.ul`
   @media screen and (min-width: 500px) {
     flex-shrink: 1;
   }
+`;
+
+export const ListButton = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: 0.25em;
+  letter-spacing: -0.01em;
+  font-size: 0.9em;
+  font-family: 'Josefin Slab',serif;
 `;
